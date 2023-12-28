@@ -32,7 +32,7 @@ class GfG
 
 class Solution
 {
-    
+   
     int kSubstrConcat(int n, String s, int k)
     {
         // Your Code Here   
@@ -48,7 +48,8 @@ class Solution
             if(map.get(key) > 1) count++;
         }
         if(map.size() > 2) return 0;
-        return count >= 2 ?0: 1;
+        return count >= 2 ?0:1;
 
-}
+        
+    }
 }
