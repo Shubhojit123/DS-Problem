@@ -1,8 +1,8 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
             List<Integer> ans = new ArrayList<>();
-        int el1 = Integer.MIN_VALUE;
-        int el2 = Integer.MIN_VALUE;
+        int el1 = 0;
+        int el2 = -1;
         int cn1 =0;
         int cn2 = 0;
 //             if(nums.length == 2 && nums[0] != nums[1])
