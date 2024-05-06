@@ -5,13 +5,13 @@ class Solution {
         int el2 = -1;
         int cn1 =0;
         int cn2 = 0;
-//             if(nums.length == 2 && nums[0] != nums[1])
-//             {
-//                     ans.add(nums[0]);
-//                     ans.add(nums[1]);
+            if(nums.length == 2 && nums[0] != nums[1])
+            {
+                    ans.add(nums[0]);
+                    ans.add(nums[1]);
                     
-//                     return ans;
-//             }
+                    return ans;
+            }
        
             for(int i=0;i<nums.length;i++)
             {
