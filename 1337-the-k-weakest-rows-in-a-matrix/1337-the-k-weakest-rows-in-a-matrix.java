@@ -1,7 +1,7 @@
 import java.util.PriorityQueue;
 
 class Solution {
-    public static class Row implements Comparable<Row> {
+ public static class Row implements Comparable<Row> {
         int sol;
         int idx;
 
@@ -19,23 +19,23 @@ class Solution {
             }
         }
     }
-
     public int[] kWeakestRows(int[][] mat, int k) {
-        int ans[] = new int[k];
-        PriorityQueue<Row> pq = new PriorityQueue<>();
-
-        for (int i = 0; i < mat.length; i++) {
-            int c = 0;
-            for (int j = 0; j < mat[0].length; j++) {
-                c += mat[i][j] == 1 ? 1 : 0;
+            int ans[] = new int[k];
+            PriorityQueue<Row> pq = new PriorityQueue<>();
+        for(int i = 0 ;i<mat.length;i++)
+        {
+                int c = 0;
+               for (int j = 0; j < mat[0].length; j++)
+                {
+                        c += mat[i][j] == 1 ? 1 :0;
+                }
+                pq.add(new Row(c , i));
+        }
+            
+            for(int i = 0 ; i<k;i++)
+            {
+                    ans[i] = pq.remove().idx;
             }
-            pq.add(new Row(c, i));
-        }
-
-        for (int i = 0; i < k; i++) {
-            ans[i] = pq.remove().idx;
-        }
-
-        return ans;
+            return ans;
     }
 }
