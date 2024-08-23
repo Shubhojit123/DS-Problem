@@ -27,24 +27,24 @@ class GFG
 
 class Solution{
     int longestUniqueSubsttr(String s){
-       int ans = 0;
-    int[] mark = new int[256]; // Array to store characters' last seen positions
-    Arrays.fill(mark, -1); // Initialize all positions to -1
-    int start = 0; // Start of the current substring without duplicates
+      
+    int ans = 0;
+    int l = 0;
+    int r = 0;
+    int len = 0;
+    int n = s.length();
+    int map[] = new int[256];
+    Arrays.fill(map, -1);
 
-    for (int i = 0; i < s.length(); i++) {
-        char currentChar = s.charAt(i);
-
-        // If the character was seen in the current valid window, update the start
-        if (mark[currentChar] >= start) {
-            start = mark[currentChar] + 1;
+    while (r < n) {
+        char currentChar = s.charAt(r);
+        if (map[currentChar] != -1 && map[currentChar] >= l) {
+            l = map[currentChar] + 1;
         }
-
-        // Update the character's last seen position
-        mark[currentChar] = i;
-
-        // Calculate the current length of the substring
-        ans = Math.max(ans, i - start + 1);
+        len = r - l + 1;
+        ans = Math.max(ans, len);
+        map[currentChar] = r;
+        r++;
     }
 
     return ans;
