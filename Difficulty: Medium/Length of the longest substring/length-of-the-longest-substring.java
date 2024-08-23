@@ -40,6 +40,7 @@ class Solution{
         char currentChar = s.charAt(r);
         if (map[currentChar] != -1 && map[currentChar] >= l) {
             l = map[currentChar] + 1;
+            map[currentChar] = r;
         }
         len = r - l + 1;
         ans = Math.max(ans, len);
