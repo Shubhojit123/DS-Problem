@@ -38,26 +38,28 @@ class Solution {
     // Function to return a list containing the DFS traversal of the graph.
     public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
         // Code here
+        ArrayList<Integer> ans = new ArrayList<>();
         
         Stack<Integer> st = new Stack<>();
-        boolean[] visit = new boolean[V];
+        
+        boolean visit[] = new boolean[V];
+        
         st.push(0);
-        ArrayList<Integer> ans = new ArrayList<>();
+        
         while(!st.isEmpty())
         {
             int curr = st.pop();
             if(!visit[curr])
             {
-                visit[curr] = true;
+                 visit[curr] = true;
                 ans.add(curr);
-
-                for (int i = adj.get(curr).size() - 1; i >= 0; i--) {
-                    int e = adj.get(curr).get(i);
-                    if (!visit[e]) {
-                        st.push(e);
-                    }
+                for(int i = adj.get(curr).size()-1;i>=0;i--)
+                {
+                    int e  = adj.get(curr).get(i);
+                    st.push(e);
                 }
             }
+           
         }
         
         return ans;
