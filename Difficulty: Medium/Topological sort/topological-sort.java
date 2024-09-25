@@ -60,42 +60,38 @@ class Main {
 
 class Solution
 {
-    //Function to return list containing vertices in Topological order. 
-     public static void inde(ArrayList<ArrayList<Integer>> adj, int indeg[]) {
-        for (int i = 0; i < adj.size(); i++) {
-            for (int j = 0; j < adj.get(i).size(); j++) {
-                int e = adj.get(i).get(j);
-                indeg[e]++;
-            }
+    public static void topo(int curr, ArrayList<ArrayList<Integer>> adj, Stack<Integer> st, boolean visit[]) {
+    visit[curr] = true;
+    
+    for (int i = 0; i < adj.get(curr).size(); i++) {
+        int dest = adj.get(curr).get(i);
+        
+        if (!visit[dest]) {
+            topo(dest, adj, st, visit);
         }
     }
+    st.push(curr);
+}
 
-    public static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
-        int[] ans = new int[V];
-        int[] indeg = new int[V];
-        inde(adj, indeg);
-        
-        Queue<Integer> q = new LinkedList<>();
-        for (int i = 0; i < V; i++) {
-            if (indeg[i] == 0) {
-                q.add(i);
-            }
+static int[] topoSort(int V, ArrayList<ArrayList<Integer>> adj) {
+    Stack<Integer> st = new Stack<>();
+    boolean visit[] = new boolean[V];
+    
+    for (int i = 0; i < V; i++) {
+        if (!visit[i]) {
+            topo(i, adj, st, visit);
         }
-
-        int index = 0;
-        while (!q.isEmpty()) {
-            int curr = q.remove();
-            ans[index++] = curr;
-
-            for (int j = 0; j < adj.get(curr).size(); j++) {
-                int e = adj.get(curr).get(j);
-                indeg[e]--;
-                if (indeg[e] == 0) {
-                    q.add(e);
-                }
-            }
-        }
-        
-        return ans;
     }
+    
+    int ans[] = new int[V];
+    int j = 0;
+    
+    while (!st.isEmpty()) {
+        ans[j++] = st.pop();
+    }
+    
+    return ans;
+}
+
+
 }
