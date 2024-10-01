@@ -46,46 +46,23 @@ class gfg {
 
 class Solution {
     // Function to return max value that can be put in knapsack of capacity W.
-      public static int help(int w, int wt[], int val[], int n)
-    {
-        int dp[][] = new int[n+1][w+1];
-         for(int i = 0 ; i<dp.length;i++)
-         {
-             dp[i][0] = 0;
-         }
-         
-         for(int i = 0; i < dp[0].length;i++)
-         {
-             dp[0][i] = 0;
-         }
-         
-         for(int i = 1 ; i < n+1;i++)
-         {
-             for(int j = 1 ; j <w+1;j++)
-             {
-                 int wei = wt[i-1];
-                 int v = val[i-1];
-                 
-                 if(wei <= j)
-                 {
-                     int inc = v + dp[i-1][j-wei];
-                     int esc = dp[i-1][j];
-                     dp[i][j] = Math.max(inc,esc);
-                 }
-                 else
-                 {
-                     dp[i][j] = dp[i-1][j];
-                 }
-             }
-         }
-         
-         return dp[n][w];
-         
+    public static int help(int w, int[] wt, int[] val, int n) {
+        if (n == 0 || w == 0) {
+            return 0;
+        }
+
+        if (wt[n - 1] <= w) {
+            return Math.max(
+                val[n - 1] + help(w - wt[n - 1], wt, val, n - 1),
+                help(w, wt, val, n - 1)
+            );
+        } else {
+            return help(w, wt, val, n - 1);
+        }
     }
-    static int knapSack(int W, int wt[], int val[]) {
-        // your code here
+
+    static int knapSack(int w, int[] wt, int[] val) {
         int n = wt.length;
-        return help(W,wt,val,n);
-        
+        return help(w, wt, val, n);
     }
 }
