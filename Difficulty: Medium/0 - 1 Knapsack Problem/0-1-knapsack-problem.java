@@ -46,23 +46,31 @@ class gfg {
 
 class Solution {
     // Function to return max value that can be put in knapsack of capacity W.
-    public static int help(int w, int[] wt, int[] val, int n) {
+    public static int help(int w, int[] wt, int[] val, int n,int dp[][]) {
         if (n == 0 || w == 0) {
             return 0;
         }
-
+        if(dp[n][w] != -1)
+        {
+            return dp[n][w];
+        }
         if (wt[n - 1] <= w) {
-            return Math.max(
-                val[n - 1] + help(w - wt[n - 1], wt, val, n - 1),
-                help(w, wt, val, n - 1)
+            return  dp[n][w] = Math.max(
+                val[n - 1] + help(w - wt[n - 1], wt, val, n - 1,dp),
+                help(w, wt, val, n - 1,dp)
             );
         } else {
-            return help(w, wt, val, n - 1);
+            return  dp[n][w] = help(w, wt, val, n - 1,dp);
         }
     }
 
     static int knapSack(int w, int[] wt, int[] val) {
         int n = wt.length;
-        return help(w, wt, val, n);
+        int dp[][] = new int[n+1][w+1];
+        for (int[] row : dp) {
+            Arrays.fill(row, -1);
+        }
+
+        return help(w, wt, val, n,dp);
     }
 }
