@@ -28,40 +28,28 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    public static int help(int arr[], int i, int j,int dp[][]) {
-        if (i >= j) {
-            return 0;
-        }
-        if(dp[i][j] != -1)
-        {
-            return dp[i][j];
-        }
-
-        int minCost = Integer.MAX_VALUE;
-
-        for (int k = i; k <= j-1; k++) {
-            int tempCost = help(arr, i, k,dp) + help(arr, k + 1, j,dp) + arr[i - 1] * arr[k] * arr[j];
-            minCost = Math.min(minCost, tempCost);
-        }
-
-        return dp[i][j] = minCost;
-    }
+    
     static int matrixMultiplication(int arr[]) {
         // code here
         
         int n = arr.length;
-        int dp[][] = new int[n+1][n+1];
+        int dp[][] = new int[n][n];
         
-        for(int i = 0 ; i<n;i++)
-        {
-            for(int j = 0 ; j<n;j++)
-            {
-                dp[i][j] = -1;
-            }
-        }
+       for(int len = 2 ; len <= n-1 ;len++)
+       {
+           for(int i = 1 ; i<=n-len;i++)
+           {
+              int j = i+len-1;
+               
+                dp[i][j] = Integer.MAX_VALUE;
+               
+               for(int k = i ; k<j;k++)
+               {
+                 dp[i][j] = Math.min(dp[i][j],dp[i][k] + dp[k+1][j] + arr[i-1]*arr[k]*arr[j]);
+               }
+           }
+       }
         
-        return help(arr,1,n-1,dp);
-        
-        
+       return dp[1][n-1]; 
     }
 }
